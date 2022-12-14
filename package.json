@@ -1,0 +1,14 @@
+{
+  "name": "jsond",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "@noble/hashes": "^1.1.4",
+    "json-bigint": "^1.0.0",
+    "vitest": "^0.25.8"
+  },
+  "devDependencies": {
+    "@types/json-bigint": "^1.0.1"
+  }
+}
