@@ -7,10 +7,28 @@ import { parse, stringify } from "json-bigint";
 async function main() {
   const data = await readFile("mock.json", "utf-8");
   const jsonData = stringify(parse(data))
-    // replace ":" with ": " (add space after colon) if not inside quotes
-    .replace(/:(?![^"]*"(?:(?:[^"]*"){2})*[^"]*$)/g, ": ")
-    // replace "," with ", " (add space after comma) if not inside quotes
-    .replace(/,(?![^"]*"(?:(?:[^"]*"){2})*[^"]*$)/g, ", ");
+    .split("")
+    .reduce<[boolean, string]>(
+      ([insideQuotes, newString], char) => {
+        if (char === '"' && newString[newString.length - 1] !== "\\") {
+          // ignore escaped quotes
+          insideQuotes = !insideQuotes;
+        }
+        if (insideQuotes) {
+          newString += char;
+          return [insideQuotes, newString];
+        }
+        if (char === ":" && !insideQuotes) {
+          newString += ": ";
+        } else if (char === "," && !insideQuotes) {
+          newString += ", ";
+        } else {
+          newString += char;
+        }
+        return [insideQuotes, newString];
+      },
+      [false, ""]
+    )[1];
 
   // write to file
   await writeFile("transformed-js.json", jsonData);
