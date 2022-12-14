@@ -1,0 +1,11 @@
+diff --git a/node_modules/json-bigint/index.js b/node_modules/json-bigint/index.js
+index 4757600..222e4e6 100644
+--- a/node_modules/json-bigint/index.js
++++ b/node_modules/json-bigint/index.js
+@@ -8,5 +8,5 @@ module.exports = function(options) {
+     }
+ };
+ //create the default method members with no options applied for backwards compatibility
+-module.exports.parse = json_parse();
++module.exports.parse = json_parse({ useNativeBigInt: true, protoAction: "preserve", constructorAction: "preserve" });
+ module.exports.stringify = json_stringify;

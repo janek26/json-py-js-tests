@@ -5,10 +5,14 @@
   "license": "MIT",
   "dependencies": {
     "@noble/hashes": "^1.1.4",
-    "json-bigint": "^1.0.0",
-    "vitest": "^0.25.8"
+    "json-bigint": "^1.0.0"
   },
   "devDependencies": {
-    "@types/json-bigint": "^1.0.1"
+    "@types/json-bigint": "^1.0.1",
+    "@types/node": "^18.11.15",
+    "patch-package": "^6.5.0"
+  },
+  "scripts": {
+    "prepare": "patch-package"
   }
 }
